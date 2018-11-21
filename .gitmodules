@@ -1,3 +1,6 @@
 [submodule "man"]
 	path = man
 	url = https://github.com/hamidzr/resume-man
+[submodule "iamh"]
+	path = iamh
+	url = https://github.com/hamidzr/iamh.git
