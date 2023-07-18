@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/asciinema-player@3.5.0/dist/bundle/asciinema-player.min.css" rel="stylesheet">
+  <title>Hamid's Asciinema Player</title>
+</head>
+<body>
+  <div id="player">
+    <!-- <a href="https://asciinema.org">Powered by Asciinema</a> -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.5.0/dist/bundle/asciinema-player.min.js"></script>
+  <script>
+    AsciinemaPlayer.create(
+      'test.cast',
+      document.getElementById('player'),
+    );
+  </script>
+</body>
+</html>
