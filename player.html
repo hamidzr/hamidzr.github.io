@@ -1,19 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/asciinema-player@3.5.0/dist/bundle/asciinema-player.min.css" rel="stylesheet">
-  <title>Hamid's Asciinema Player</title>
-</head>
-<body>
-  <div id="player">
-    <!-- <a href="https://asciinema.org">Powered by Asciinema</a> -->
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.5.0/dist/bundle/asciinema-player.min.js"></script>
-  <script>
-    AsciinemaPlayer.create(
-      'test.cast',
-      document.getElementById('player'),
-    );
-  </script>
-</body>
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/asciinema-player@3.5.0/dist/bundle/asciinema-player.min.css" rel="stylesheet">
+    <title>Hamid's Asciinema Player</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+
+      #player {
+        width: 80%;
+        height: 80%;
+        border: 1px solid #ccc;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #file-select-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007BFF;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1em;
+      }
+
+      #file-select-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player">
+      <!-- <a href="https://asciinema.org">Powered by Asciinema</a> -->
+    </div>
+    <input type="file" id="file-input" accept=".cast" style="display: none;" />
+    <button id="file-select-button">Select .cast file</button>
+    <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.5.0/dist/bundle/asciinema-player.min.js"></script>
+    <script>
+      const playerElement = document.getElementById('player');
+      const fileInput = document.getElementById('file-input');
+      const selectButton = document.getElementById('file-select-button');
+
+      selectButton.addEventListener('click', () => fileInput.click());
+
+      const createPlayer = (textData) => {
+        playerElement.innerHTML = '';
+        AsciinemaPlayer.create(
+          {
+            data: textData,
+          },
+          playerElement,
+        );
+      };
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => createPlayer(e.target.result);
+        reader.readAsText(file);
+      });
+
+      playerElement.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }, false);
+
+      playerElement.addEventListener('drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const file = e.dataTransfer.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => createPlayer(e.target.result);
+        reader.readAsText(file);
+      }, false);
+    </script>
+  </body>
 </html>
