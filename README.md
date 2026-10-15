@@ -7,3 +7,4 @@ Static GitHub Pages site, no build step.
 - `player.html`: asciinema cast player (SRI-pinned CDN assets)
 - `dl/`: downloadable files, served under `/dl`
 - `assets/`: shared static assets
+- `icon.svg`, `favicon.ico`, `apple-touch-icon.png`: site icons (HZ monogram), linked from every page
